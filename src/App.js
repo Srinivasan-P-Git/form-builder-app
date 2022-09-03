@@ -1,44 +1,20 @@
-import { useEffect, useReducer } from "react";
+import { Routes, Route } from "react-router-dom";
 
-import Header from "./components/header/header.component";
+import Home from "./routes/home/home.component";
+import Navigate from "./routes/navigate/navigate.component";
 import FormBuilder from "./components/form-builder/form-builder.component";
 
 import "./App.scss";
 
-const INITIAL_STATE = {
-  formTemplate: [],
-  formData: {},
-};
-
-const formReducer = (state, action) => {
-  const { type, payload } = action;
-  switch (type) {
-    case "SET_FORM": {
-      return {
-        ...state,
-        ...payload,
-      };
-    }
-    default: {
-      throw new Error(`Unhandled Action Type - ${type} - in Form Reducer`);
-    }
-  }
-};
-
 const App = () => {
-  const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
-  const { formTemplate, formData } = state;
-
-  useEffect(() => {
-    //TODO:Need to make API call for data
-  }, []);
-
   return (
     <div className="app-container">
-      <div className="app-wrapper">
-        <Header />
-        <FormBuilder formTemplate={formTemplate} formData={formData} />
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route index element={<Navigate />} />
+          <Route path="form" element={<FormBuilder />} />
+        </Route>
+      </Routes>
     </div>
   );
 };
