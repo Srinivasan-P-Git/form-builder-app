@@ -1,21 +1,37 @@
-import { useEffect, useReducer } from "react";
+import React from "react";
+import { Form } from "react-final-form";
+import Button from "@mui/material/Button";
+import arrayMutators from "final-form-arrays";
 
-import formReducer from "../../reducers/form/form.reducer";
+import USER_DATA from "./../../assets/user-data";
+import USER_TEMPLATE from "./../../assets/user-template";
+import { generateFormFields } from "./../../utils/generate-form-fields.utils";
 
 import "./form-builder.styles.scss";
 
-const INITIAL_STATE = {
-  formTemplate: [],
-  formData: {},
-};
-
 const FormBuilder = () => {
-  const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
-  const { formTemplate, formData } = state;
-  useEffect(() => {
-    //TODO:Need to make API call for data
-  }, []);
-  return <h3>From Form Builder</h3>;
+  return (
+    <div className="form-container">
+      <Form
+        onSubmit={(val) => {
+          console.log("SUBMITTED", val);
+        }}
+        initialValues={USER_DATA}
+        mutators={{ ...arrayMutators }}
+        render={(formRenderProps) => {
+          const { handleSubmit } = formRenderProps;
+          return (
+            <form onSubmit={handleSubmit}>
+              {generateFormFields(USER_TEMPLATE)}
+              <Button type="submit" variant="contained">
+                Submit
+              </Button>
+            </form>
+          );
+        }}
+      />
+    </div>
+  );
 };
 
 export default FormBuilder;
