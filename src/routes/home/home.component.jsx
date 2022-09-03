@@ -9,7 +9,6 @@ const Home = () => {
     <div className="home-container">
       <Header />
       <Outlet />
-      {/* <FormBuilder formTemplate={formTemplate} formData={formData} /> */}
     </div>
   );
 };
