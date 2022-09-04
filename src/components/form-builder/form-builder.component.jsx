@@ -71,6 +71,7 @@ const FormBuilder = () => {
 
   return (
     <div className="form-container">
+      <div className="form-title">Form Details</div>
       <Form
         onSubmit={submitForm}
         initialValues={formData}
