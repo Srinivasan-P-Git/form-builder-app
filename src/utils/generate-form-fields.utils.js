@@ -107,8 +107,8 @@ const getCheckboxField = ({ id, name, validate, options }) => {
         const onChangeHandler = (e, option) => {
           if (e.target.checked) fields.push(option);
           else {
-            let idx = fields.value.indexOf(option);
-            fields.remove(idx);
+            let idx = fields.value?.indexOf(option);
+            if (idx >= 0) fields.remove(idx);
           }
         };
         let isValid = {};
@@ -132,7 +132,11 @@ const getCheckboxField = ({ id, name, validate, options }) => {
                     <Checkbox
                       value={option}
                       onChange={(event) => onChangeHandler(event, option)}
-                      checked={fields.value.indexOf(option) !== -1}
+                      checked={
+                        fields.value && fields.value.indexOf(option) !== -1
+                          ? true
+                          : false
+                      }
                     />
                   }
                   label={option}
