@@ -1,4 +1,4 @@
-const VALIDATION_MESSAGES = {
+export const VALIDATION_MESSAGES = {
   REQUIRED_FIELD: "Required Field",
   NUMBER_FIELD: "Please Enter a Number",
 };
