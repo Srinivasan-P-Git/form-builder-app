@@ -3,17 +3,17 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
-import { AlertContextProvider } from "./context/alert/alert.context";
+import { ModalContextProvider } from "./context/modal/modal.context";
 
-const root = document.getElementById("root");
+const appRoot = document.getElementById("app-root");
 
 ReactDOM.render(
   <StrictMode>
     <BrowserRouter>
-      <AlertContextProvider>
+      <ModalContextProvider>
         <App />
-      </AlertContextProvider>
+      </ModalContextProvider>
     </BrowserRouter>
   </StrictMode>,
-  root
+  appRoot
 );

@@ -5,23 +5,26 @@ import arrayMutators from "final-form-arrays";
 import { useNavigate } from "react-router-dom";
 
 import formReducer from "./../../reducers/form/form.reducer";
-import { AlertContext } from "../../context/alert/alert.context";
+import {
+  ModalContext,
+  MODAL_INITIAL_STATE,
+} from "../../context/modal/modal.context";
 import { formTemplateUrl, formDataUrl } from "./../../config/form-api.config";
 import { generateFormFields } from "./../../utils/generate-form-fields.utils";
 
 import "./form-builder.styles.scss";
 
-const INITIAL_STATE = {
+const FORM_INITIAL_STATE = {
   formTemplate: [],
   formData: {},
 };
 
 const FormBuilder = () => {
-  const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(formReducer, FORM_INITIAL_STATE);
   const { formTemplate, formData } = state;
   const navigate = useNavigate();
 
-  const { setIsOpen, setAlertContent, onClose } = useContext(AlertContext);
+  const { dispatchModal } = useContext(ModalContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,12 +39,21 @@ const FormBuilder = () => {
           },
         });
       } catch (err) {
-        setIsOpen(true);
-        setAlertContent(
-          `${err} - Error in Fetching Form Template - Make sure API URL(s) are valid`
-        );
-        onClose(() => {
-          navigate("/");
+        dispatchModal({
+          type: "SHOW_MODAL",
+          payload: {
+            modalType: "Alert",
+            modalProps: {
+              handleClose: () => {
+                navigate("/");
+                dispatchModal({
+                  type: "HIDE_MODAL",
+                  payload: MODAL_INITIAL_STATE,
+                });
+              },
+              content: `${err} - Error in Fetching Template - Check Template URL(s) API Config`,
+            },
+          },
         });
       }
     };
@@ -58,15 +70,39 @@ const FormBuilder = () => {
     })
       .then((res) => res.json())
       .then(() => {
-        setIsOpen(true);
-        setAlertContent("Data submitted successfully");
-        onClose(() => {
-          navigate("/");
+        dispatchModal({
+          type: "SHOW_MODAL",
+          payload: {
+            modalType: "Alert",
+            modalProps: {
+              handleClose: () => {
+                navigate("/");
+                dispatchModal({
+                  type: "HIDE_MODAL",
+                  payload: MODAL_INITIAL_STATE,
+                });
+              },
+              content: "Data Submitted Successfully",
+            },
+          },
         });
       })
       .catch((err) => {
-        setIsOpen(true);
-        setAlertContent(`${err} - Error in submitting Data`);
+        dispatchModal({
+          type: "SHOW_MODAL",
+          payload: {
+            modalType: "Alert",
+            modalProps: {
+              handleClose: () => {
+                dispatchModal({
+                  type: "HIDE_MODAL",
+                  payload: MODAL_INITIAL_STATE,
+                });
+              },
+              content: `${err} - Error in submitting Data`,
+            },
+          },
+        });
       });
 
   return (
