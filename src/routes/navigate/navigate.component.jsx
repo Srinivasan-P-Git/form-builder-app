@@ -1,12 +1,24 @@
 import { Link } from "react-router-dom";
 
+import Button from "../../components/button/button.component";
+
 import "./navigate.styles.scss";
 
 const Navigate = () => {
   return (
     <div className="navigate-container">
-      <div className="nav-link">
-        <Link to={"form"}>Generate Form</Link>
+      <div className="nav-heading">
+        Hi!! Build your form instantly &#128522;
+      </div>
+      <div className="nav-link-container">
+        <div className="nav-link-wrapper">
+          <Button>
+            <Link to={"configure-json"}>{"Use JSON {...}"}</Link>
+          </Button>
+          <Button>
+            <Link to={"configure-api"}>{"Use API </>"}</Link>
+          </Button>
+        </div>
       </div>
     </div>
   );

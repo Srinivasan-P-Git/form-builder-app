@@ -1,21 +1,28 @@
+$color:#1975d2;
+$hundredPercent:100%;
+
 .navigate-container {
-    width: 100%;
+    width: $hundredPercent;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 
-    .nav-link {
-        background-color: #1976d2;
+    .nav-heading {
         display: flex;
-        justify-content: center;
         align-items: center;
-        padding: 15px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: all 0.8s ease-in-out;
-        &:hover {
-            transform: scale(1.2);
+        font-size: large;
+        color: $color;
+        flex: 1 0 auto;
+    }
+
+    .nav-link-container {
+        width: $hundredPercent;
+        .nav-link-wrapper {
+            display: flex;
+            width: $hundredPercent;
+            justify-content: space-evenly;
         }
+        flex: 2 0 auto;
     }
 }
