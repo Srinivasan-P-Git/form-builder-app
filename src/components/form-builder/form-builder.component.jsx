@@ -9,8 +9,9 @@ import {
   ModalContext,
   MODAL_INITIAL_STATE,
 } from "../../context/modal/modal.context";
-import { formTemplateUrl, formDataUrl } from "./../../config/form-api.config";
+// import { formTemplateUrl, formDataUrl } from "./../../config/form-api.config";
 import { generateFormFields } from "./../../utils/generate-form-fields.utils";
+import { ConfigureJsonContext } from "./../../context/configure-json/configure-json.context";
 
 import "./form-builder.styles.scss";
 
@@ -25,7 +26,21 @@ const FormBuilder = () => {
   const navigate = useNavigate();
 
   const { dispatchModal } = useContext(ModalContext);
+  const { jsonTemplate, jsonData } = useContext(ConfigureJsonContext);
 
+  useEffect(() => {
+    dispatch({
+      type: "SET_FORM",
+      payload: {
+        formTemplate: JSON.parse(jsonTemplate),
+        formData: JSON.parse(jsonData),
+      },
+    });
+  }, [jsonTemplate, jsonData, dispatch]);
+
+  /**
+   * TODO: For Use API Feature
+   * 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -59,51 +74,27 @@ const FormBuilder = () => {
     };
     fetchData();
   }, []);
+   * 
+   */
 
-  const submitForm = (data) =>
-    fetch(formDataUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+  const submitForm = (data) => {
+    dispatchModal({
+      type: "SHOW_MODAL",
+      payload: {
+        modalType: "Alert",
+        modalProps: {
+          handleClose: () => {
+            navigate("/");
+            dispatchModal({
+              type: "HIDE_MODAL",
+              payload: MODAL_INITIAL_STATE,
+            });
+          },
+          content: JSON.stringify(data),
+        },
       },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        dispatchModal({
-          type: "SHOW_MODAL",
-          payload: {
-            modalType: "Alert",
-            modalProps: {
-              handleClose: () => {
-                navigate("/");
-                dispatchModal({
-                  type: "HIDE_MODAL",
-                  payload: MODAL_INITIAL_STATE,
-                });
-              },
-              content: "Data Submitted Successfully",
-            },
-          },
-        });
-      })
-      .catch((err) => {
-        dispatchModal({
-          type: "SHOW_MODAL",
-          payload: {
-            modalType: "Alert",
-            modalProps: {
-              handleClose: () => {
-                dispatchModal({
-                  type: "HIDE_MODAL",
-                  payload: MODAL_INITIAL_STATE,
-                });
-              },
-              content: `${err} - Error in submitting Data`,
-            },
-          },
-        });
-      });
+    });
+  };
 
   return (
     <div className="form-container">

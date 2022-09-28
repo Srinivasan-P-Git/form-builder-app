@@ -16,7 +16,9 @@ const Navigate = () => {
             <Link to={"configure-json"}>{"Use JSON {...}"}</Link>
           </Button>
           <Button>
-            <Link to={"configure-api"}>{"Use API </>"}</Link>
+            {"Use API </>"}
+            <div className="btn-subtext">Coming soon...</div>
+            {/* <Link to={"configure-api"}>{"Use API </>"}</Link> */}
           </Button>
         </div>
       </div>
