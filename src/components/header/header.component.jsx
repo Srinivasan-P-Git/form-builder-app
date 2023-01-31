@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import "./header.styles.scss";
+import './header.styles.scss';
 
 const Header = () => {
   const navigate = useNavigate();
-  const goToHome = () => navigate("/");
+  const goToHome = () => navigate('/');
   return (
     <div className="header-container">
       <div className="title" onClick={goToHome}>

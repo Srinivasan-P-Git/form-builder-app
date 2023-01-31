@@ -1,18 +1,19 @@
-import { Field } from "react-final-form";
-import { FieldArray } from "react-final-form-arrays";
+import React from 'react';
+import { Field } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import Checkbox from "@mui/material/Checkbox";
-import FormLabel from "@mui/material/FormLabel";
-import TextField from "@mui/material/TextField";
-import InputLabel from "@mui/material/InputLabel";
-import FormGroup from "@mui/material/FormGroup";
-import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import Checkbox from '@mui/material/Checkbox';
+import FormLabel from '@mui/material/FormLabel';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import FormGroup from '@mui/material/FormGroup';
+import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
-import { isRequired, isNumber, combineValidators } from "./validations.utils";
+import { isRequired, isNumber, combineValidators } from './validations.utils';
 
 const generateFieldValidators = (formField) => {
   let fieldValidators = [];
@@ -21,7 +22,7 @@ const generateFieldValidators = (formField) => {
   if (required) fieldValidators.push(isRequired);
 
   switch (type) {
-    case "number":
+    case 'number':
       fieldValidators.push(isNumber);
       break;
     default:
@@ -41,8 +42,8 @@ const getTextField = ({ id, name, validate }) => {
         let { input, meta } = fieldRenderProps;
         let isValid = {};
         if (meta.error && meta.touched) {
-          isValid["error"] = true;
-          isValid["helperText"] = meta.error;
+          isValid['error'] = true;
+          isValid['helperText'] = meta.error;
         }
         return (
           <TextField
@@ -52,7 +53,7 @@ const getTextField = ({ id, name, validate }) => {
             label={name}
             size="small"
             margin="dense"
-            variant={"standard"}
+            variant={'standard'}
           />
         );
       }}
@@ -70,12 +71,12 @@ const getSelectField = ({ id, name, validate, options }) => {
         let { input, meta } = fieldRenderProps;
         let isValid = {};
         if (meta.error && meta.touched) {
-          isValid["error"] = true;
-          isValid["helperText"] = meta.error;
+          isValid['error'] = true;
+          isValid['helperText'] = meta.error;
         }
         return (
           <FormControl
-            variant={"standard"}
+            variant={'standard'}
             error={isValid.error}
             fullWidth
             margin="dense"
@@ -88,7 +89,7 @@ const getSelectField = ({ id, name, validate, options }) => {
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>{isValid["helperText"]}</FormHelperText>
+            <FormHelperText>{isValid['helperText']}</FormHelperText>
           </FormControl>
         );
       }}
@@ -113,13 +114,13 @@ const getCheckboxField = ({ id, name, validate, options }) => {
         };
         let isValid = {};
         if (meta.error && meta.touched) {
-          isValid["error"] = true;
-          isValid["helperText"] = meta.error;
+          isValid['error'] = true;
+          isValid['helperText'] = meta.error;
         }
         return (
           <FormControl
             error={isValid.error}
-            variant={"standard"}
+            variant={'standard'}
             fullWidth
             margin="dense"
           >
@@ -143,7 +144,7 @@ const getCheckboxField = ({ id, name, validate, options }) => {
                 />
               ))}
             </FormGroup>
-            <FormHelperText>{isValid["helperText"]}</FormHelperText>
+            <FormHelperText>{isValid['helperText']}</FormHelperText>
           </FormControl>
         );
       }}
@@ -158,17 +159,17 @@ export const generateFormFields = (formFields) => {
     let element;
 
     switch (type) {
-      case "text":
-      case "number": {
+      case 'text':
+      case 'number': {
         element = getTextField({ id, name, validate });
         break;
       }
-      case "select": {
+      case 'select': {
         let { options } = formField;
         element = getSelectField({ id, name, validate, options });
         break;
       }
-      case "checkbox": {
+      case 'checkbox': {
         let { options } = formField;
         element = getCheckboxField({ id, name, validate, options });
         break;

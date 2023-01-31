@@ -1,9 +1,10 @@
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import Dialog from "@mui/material/Dialog";
-import Button from "@mui/material/Button";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
+import Dialog from '@mui/material/Dialog';
+import Button from '@mui/material/Button';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
 
 const Alert = ({ handleClose, content }) => {
   return (
@@ -16,7 +17,7 @@ const Alert = ({ handleClose, content }) => {
   );
 };
 
-const alertRoot = document.getElementById("alert-root");
+const alertRoot = document.getElementById('alert-root');
 ReactDOM.createPortal(<Alert />, alertRoot);
 
 export default Alert;

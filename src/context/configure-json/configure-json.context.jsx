@@ -1,49 +1,49 @@
-import { createContext, useState } from "react";
+import React, { createContext, useState } from 'react';
 
 export const INITIAL_FORM_DATA = {
   jsonTemplate: [
     {
-      id: "firstName",
-      name: "First Name",
-      type: "text",
+      id: 'firstName',
+      name: 'First Name',
+      type: 'text',
       required: true,
     },
     {
-      id: "lastName",
-      name: "Last Name",
-      type: "text",
+      id: 'lastName',
+      name: 'Last Name',
+      type: 'text',
       required: true,
     },
     {
-      id: "age",
-      name: "Age",
-      type: "number",
+      id: 'age',
+      name: 'Age',
+      type: 'number',
       required: true,
     },
     {
-      id: "gender",
-      name: "Gender",
-      type: "select",
+      id: 'gender',
+      name: 'Gender',
+      type: 'select',
       required: true,
-      options: ["Male", "Female", "Trans-Gender"],
+      options: ['Male', 'Female', 'Trans-Gender'],
     },
     {
-      id: "skills",
-      name: "Skills",
-      type: "checkbox",
+      id: 'skills',
+      name: 'Skills',
+      type: 'checkbox',
       required: false,
-      options: ["Fore Hand", "Back Hand", "Serve", "Volley"],
+      options: ['Fore Hand', 'Back Hand', 'Serve', 'Volley'],
     },
     {
-      id: "playStyle",
-      name: "Playing Style",
-      type: "select",
+      id: 'playStyle',
+      name: 'Playing Style',
+      type: 'select',
       required: false,
-      options: ["Aggressive", "Defensive"],
+      options: ['Aggressive', 'Defensive'],
     },
   ],
   jsonData: {
-    firstName: "Roger",
+    firstName: 'Roger',
     age: 41,
   },
 };

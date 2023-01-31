@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import Button from "../../components/button/button.component";
+import Button from '../../components/button/button.component';
 
-import "./navigate.styles.scss";
+import './navigate.styles.scss';
 
 const Navigate = () => {
   return (
@@ -13,10 +14,10 @@ const Navigate = () => {
       <div className="nav-link-container">
         <div className="nav-link-wrapper">
           <Button>
-            <Link to={"configure-json"}>{"Use JSON {...}"}</Link>
+            <Link to={'configure-json'}>{'Use JSON {...}'}</Link>
           </Button>
           <Button>
-            {"Use API </>"}
+            {'Use API </>'}
             <div className="btn-subtext">Coming soon...</div>
             {/* <Link to={"configure-api"}>{"Use API </>"}</Link> */}
           </Button>

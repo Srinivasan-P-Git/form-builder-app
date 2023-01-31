@@ -1,19 +1,19 @@
-import React, { useContext, useEffect, useReducer } from "react";
-import { Form } from "react-final-form";
-import Button from "@mui/material/Button";
-import arrayMutators from "final-form-arrays";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useReducer } from 'react';
+import { Form } from 'react-final-form';
+import Button from '@mui/material/Button';
+import arrayMutators from 'final-form-arrays';
+import { useNavigate } from 'react-router-dom';
 
-import formReducer from "./../../reducers/form/form.reducer";
+import formReducer from './../../reducers/form/form.reducer';
 import {
   ModalContext,
   MODAL_INITIAL_STATE,
-} from "../../context/modal/modal.context";
+} from '../../context/modal/modal.context';
 // import { formTemplateUrl, formDataUrl } from "./../../config/form-api.config";
-import { generateFormFields } from "./../../utils/generate-form-fields.utils";
-import { ConfigureJsonContext } from "./../../context/configure-json/configure-json.context";
+import { generateFormFields } from './../../utils/generate-form-fields.utils';
+import { ConfigureJsonContext } from './../../context/configure-json/configure-json.context';
 
-import "./form-builder.styles.scss";
+import './form-builder.styles.scss';
 
 const FORM_INITIAL_STATE = {
   formTemplate: [],
@@ -30,7 +30,7 @@ const FormBuilder = () => {
 
   useEffect(() => {
     dispatch({
-      type: "SET_FORM",
+      type: 'SET_FORM',
       payload: {
         formTemplate: JSON.parse(jsonTemplate),
         formData: JSON.parse(jsonData),
@@ -79,14 +79,14 @@ const FormBuilder = () => {
 
   const submitForm = (data) => {
     dispatchModal({
-      type: "SHOW_MODAL",
+      type: 'SHOW_MODAL',
       payload: {
-        modalType: "Alert",
+        modalType: 'Alert',
         modalProps: {
           handleClose: () => {
-            navigate("/");
+            navigate('/');
             dispatchModal({
-              type: "HIDE_MODAL",
+              type: 'HIDE_MODAL',
               payload: MODAL_INITIAL_STATE,
             });
           },

@@ -1,7 +1,7 @@
-import { createContext, useReducer } from "react";
+import React, { createContext, useReducer } from 'react';
 
-import Alert from "../../components/alert/alert.component";
-import modalReducer from "../../reducers/modal/modal.reducer";
+import Alert from '../../components/alert/alert.component';
+import modalReducer from '../../reducers/modal/modal.reducer';
 
 export const ModalContext = createContext({
   dispatchModal: () => {},
@@ -14,7 +14,7 @@ export const MODAL_INITIAL_STATE = {
 
 const renderModalType = (modalType, modalProps) => {
   switch (modalType) {
-    case "Alert": {
+    case 'Alert': {
       return <Alert {...modalProps} />;
     }
     default: {
